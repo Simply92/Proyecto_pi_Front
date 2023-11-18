@@ -1,0 +1,47 @@
+.contenedor{
+background-image: url(https://e1.pxfuel.com/desktop-wallpaper/661/885/desktop-wallpaper-nature-pokemon-and-mobile-backgrounds-pokemon-landscape.jpg);
+background-size: 100% 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+height: 100vh;}
+
+.btn{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color:  #FFD700;
+    width: 130px;
+    height: 30px;
+    border:none;
+    background-color: red;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.info{
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+.Img{
+    width: 400px;
+    height: 400px;
+}
+
+.conImg{
+    align-items: center;
+    display: flex;
+    width: 50%;
+    justify-content: center;
+}
+
+.datos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
