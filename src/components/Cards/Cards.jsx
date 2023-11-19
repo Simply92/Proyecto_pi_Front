@@ -6,7 +6,7 @@ import Loading from "../Loading/Loading";
 import SearchBar from "../SearchBar/SearchBar";
 import Filter from "../Filter/Filter";
 import { Link } from "react-router-dom";
-import style from "./cards.module.css";
+import style from "./Cards.module.css";
 
 const Cards = () => {
   const pokemons = useSelector((state) => state.pokemons);

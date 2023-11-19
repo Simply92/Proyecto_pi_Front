@@ -39,7 +39,7 @@ export const getPokemonName = (name) =>{
                 payload: pokemonName.data
             })
         } catch (error) {
-            alert("this pokemon does not exist!", '', 'error')
+            alert("this pokemon does not exist!")
              
         }
     }

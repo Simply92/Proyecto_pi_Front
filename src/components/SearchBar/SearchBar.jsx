@@ -32,7 +32,7 @@ const SearchBar = ({setCurrent}) => {
                     onChange={handleChange}
                     placeholder="Search pokemon"
                     />
-            <button className={style.btn} type="submit">Search!</button>
+            <button className={style.btn} type="submit">Search</button>
         </form>
         </div>
     )

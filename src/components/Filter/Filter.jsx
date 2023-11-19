@@ -79,13 +79,13 @@ const Filter = ({setCurrent}) => {
             </select>
             <select className={style.sel} value={op4} onChange={handleType}>
                 <option value="" disabled>Select type</option>
-                <option value="type">All</option>
+                <option value="All">All</option>
                 {types.map((type) => (
                     <option key={type.id} value={type.name}>
                         {type.name.charAt(0).toUpperCase() + type.name.slice(1)}</option>
                 ))}
             </select>
-            <button className={style.btn} onClick={clearFilters}>Clear!</button>
+            <button className={style.btn} onClick={clearFilters}>Clear</button>
         </div>
         </div>
     )

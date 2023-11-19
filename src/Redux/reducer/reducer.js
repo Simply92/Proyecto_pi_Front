@@ -44,7 +44,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
         case FIL_TYPE:
             typeSelected = state.allPokemons;
             results =
-              payload === "type"
+              payload === "All"
                 ? typeSelected
                 : typeSelected.filter((e) => e.types.includes(payload));
             return {
