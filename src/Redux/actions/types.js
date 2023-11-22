@@ -9,3 +9,4 @@ export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_ATTACK = "ORDER_ATTACK";
 export const CLEAR_HOME = "CLEAR_HOME";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+

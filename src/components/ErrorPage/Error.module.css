@@ -1,0 +1,36 @@
+.contenedor{
+    background-color: rgb(204, 204, 31);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.fondo{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    width: 700px;
+    height: 500px;
+    padding: 100px 0px 0px 0px;
+}
+
+.imgError{
+    width: 300px;
+    height: 300px;
+}
+
+.button{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    border-radius: 20px;
+    width: 500px;
+    height: 80px;
+    left: 37%;
+    top: 13%;
+    border: none;
+    cursor: pointer;
+}
+

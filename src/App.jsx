@@ -4,6 +4,8 @@ import Home from './components/Home/Home';
 import {Routes, Route} from 'react-router-dom';
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
+import ErrorPage from './components/ErrorPage/Error';
+
 function App() {
   return (
     <div className="App">
@@ -12,6 +14,7 @@ function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
         <Route path='/create' element={<Form/>}/>
+        <Route path='*' element={<ErrorPage/>}/>
       </Routes>
     </div>
   );

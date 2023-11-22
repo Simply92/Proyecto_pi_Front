@@ -1,12 +1,12 @@
 .contenedor{
     padding-top: 20px;
     display: flex;
-    background-image: url("https://www.solofondos.com/wp-content/uploads/2016/01/Fondos-de-pantalla-pokemon.jpg");
+    background-image: url("https://www.solofondos.com/wp-content/uploads/2016/01/353010.png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 93vh;
+    height:859px;
     flex-direction: column;
     align-items: center;
     justify-content: center;

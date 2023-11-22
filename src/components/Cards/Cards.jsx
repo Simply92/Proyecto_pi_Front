@@ -18,7 +18,7 @@ const Cards = () => {
     dispatch(getPokemon());
   }, []);
 
-  const pageCount = Math.ceil(pokemons?.length / cardsPage);
+  const pageCount = Math.ceil(pokemons?.length / cardsPage); //rendondea para arriba
 
   const paginatedCards = pokemons?.slice(
     current * cardsPage,
