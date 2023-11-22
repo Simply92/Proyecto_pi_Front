@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Filter from "../Filter/Filter";
 import { Link } from "react-router-dom";
 import style from "./Cards.module.css";
+import ImgLogo from "./logo3.png"
 
 const Cards = () => {
   const pokemons = useSelector((state) => state.pokemons);
@@ -38,6 +39,7 @@ const Cards = () => {
   return (
     <div>
       <div className={style.navBar}>
+        <img className={style.imgLogo} src={ImgLogo} alt="" />
       <Link to={"/create"}>
         <button className={style.linkBtn} >CREATE NEW POKEMON</button>
       </Link>
