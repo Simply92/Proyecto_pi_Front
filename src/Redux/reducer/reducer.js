@@ -1,10 +1,11 @@
-import {GET_POK, GET_ID, GET_NAME, GET_TYPES, FIL_TYPE, CLEAR_DETAIL, FIL_CREATE, ORDER_NAME, ORDER_ATTACK, CLEAR_HOME} from "../actions/types"
+import {GET_POK, GET_ID, GET_NAME, GET_TYPES, FIL_TYPE, CLEAR_DETAIL, FIL_CREATE, ORDER_NAME, ORDER_ATTACK, CLEAR_HOME, SET_LOADING} from "../actions/types"
 //
 const initialState = {
     allPokemons: [],
     pokemons: [],
     pokedetail: {},
     types: [],
+    isLoading: false,
 }
 let pokOrder;
 let pokSort;
@@ -36,6 +37,11 @@ const rootReducer = (state = initialState, {type, payload}) => {
                 ...state,
                 types: payload
             }
+        case SET_LOADING:
+      return {
+        ...state,
+        isLoading: payload,
+      };
         case CLEAR_DETAIL:
             return{
                 ...state,

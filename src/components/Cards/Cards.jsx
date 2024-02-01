@@ -7,17 +7,18 @@ import SearchBar from "../SearchBar/SearchBar";
 import Filter from "../Filter/Filter";
 import { Link } from "react-router-dom";
 import style from "./Cards.module.css";
-import ImgLogo from "./logo3.png"
+import ImgLogo from "./logo3.png";
 
 const Cards = () => {
   const pokemons = useSelector((state) => state.pokemons);
+  const isLoading = useSelector((state) => state.isLoading);
   const dispatch = useDispatch();
-
   const [current, setCurrent] = useState(0);
   const cardsPage = 12;
+
   useEffect(() => {
     dispatch(getPokemon());
-  }, []);
+  }, [dispatch]);
 
   const pageCount = Math.ceil(pokemons?.length / cardsPage); //rendondea para arriba
 
@@ -26,13 +27,13 @@ const Cards = () => {
     (current + 1) * cardsPage
   );
   const handleNextClick = () => {
-    if (current < pageCount - 1) {
+    if (!isLoading && current < pageCount - 1) {
       setCurrent(current + 1);
     }
   };
 
   const handlePrevClick = () => {
-    if (current > 0) {
+    if (!isLoading && current > 0) {
       setCurrent(current - 1);
     }
   };
@@ -40,21 +41,27 @@ const Cards = () => {
     <div>
       <div className={style.navBar}>
         <img className={style.imgLogo} src={ImgLogo} alt="" />
-      <Link to={"/create"}>
-        <button className={style.linkBtn} >CREATE NEW POKEMON</button>
-      </Link>
-      <SearchBar setCurrent={setCurrent}/>
+        <Link to={"/create"}>
+          <button className={style.linkBtn}>CREATE NEW POKEMON</button>
+        </Link>
+        <SearchBar setCurrent={setCurrent} />
       </div>
       <div className={style.contenedor}>
         <div className={style.ssss}>
-        <Filter setCurrent={setCurrent}/>
+          <Filter setCurrent={setCurrent} />
           <div className={style.paginado}>
-            <button className={style.btnFlecha} disabled={current === 0} onClick={handlePrevClick}>
+            <button
+              className={style.btnFlecha}
+              disabled={current === 0}
+              onClick={handlePrevClick}
+            >
               {"<"}
             </button>
             {Array.from({ length: pageCount }).map((_, index) => (
               <button
-                className={`${current === index ? style.numberActive : style.numberNormal}`}
+                className={`${
+                  current === index ? style.numberActive : style.numberNormal
+                }`}
                 key={index}
                 disabled={current === index}
                 onClick={() => setCurrent(index)}
@@ -72,8 +79,10 @@ const Cards = () => {
           </div>
           {paginatedCards.length ? (
             <div className={style.cards}>
-              {paginatedCards.map((poke) => {
-                return (
+              {isLoading ? (
+                <Loading />
+              ) : (
+                paginatedCards.map((poke) => (
                   <Card
                     name={poke.name}
                     key={poke.id}
@@ -82,8 +91,8 @@ const Cards = () => {
                     attack={poke.attack}
                     types={poke.types}
                   />
-                );
-              })}{" "}
+                ))
+              )}
             </div>
           ) : (
             <Loading />

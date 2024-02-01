@@ -1,7 +1,8 @@
 import axios from  "axios";
 import { GET_ID, GET_NAME, GET_POK, GET_TYPES, POST_POK,
-FIL_CREATE, FIL_TYPE, ORDER_NAME, ORDER_ATTACK, CLEAR_HOME, CLEAR_DETAIL } from "./types";
+FIL_CREATE, FIL_TYPE, ORDER_NAME, ORDER_ATTACK, CLEAR_HOME, CLEAR_DETAIL, SET_LOADING } from "./types";
 const url = import.meta.env.VITE_BACK_URL
+import Swal from "sweetalert2";
 
 
 export const getPokemon = () => {
@@ -34,15 +35,22 @@ export const getPokemonId = (id) => {
 export const getPokemonName = (name) =>{
     return async (dispatch) => {
         try {
+            dispatch({ type: SET_LOADING, payload: true })
             const pokemonName = await axios.get(`${url}/pokemons/?name=${name}`);
             return dispatch({
                 type: GET_NAME,
                 payload: pokemonName.data
             })
         } catch (error) {
-            alert("this pokemon does not exist!")
-             
+            Swal.fire({
+                title: "Error!",
+                text: "this pokemon does not exist!",
+                icon: "error",
+              });   
         }
+        finally {
+            dispatch({ type: SET_LOADING, payload: false }); // Establece isLoading a false independientemente de si hay un error o no
+          }
     }
 }
 

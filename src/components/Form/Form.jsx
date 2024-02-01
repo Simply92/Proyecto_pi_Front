@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import validate from "./validate";
 import style from "./Form.module.css";
+import Swal from "sweetalert2";
 
 const Form = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-  const pokemons = useSelector((state) => state.allPokemons)
+  const pokemons = useSelector((state) => state.allPokemons);
 
   const [input, setInput] = useState({
     name: "",
@@ -24,12 +25,12 @@ const Form = () => {
   const [error, setError] = useState({
     name: "",
     stats: "",
-    types: []
+    types: [],
   });
 
   useEffect(() => {
     dispatch(getTypes());
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (event) => {
     setInput({
@@ -37,41 +38,41 @@ const Form = () => {
       [event.target.name]: event.target.value,
     });
     setError(
-      validate({
-        ...input,
-        [event.target.name]: event.target.value,
-      }, pokemons)
+      validate(
+        {
+          ...input,
+          [event.target.name]: event.target.value,
+        },
+        pokemons
+      )
     );
   };
 
   const handleCheck = (e) => {
-    if (e.target.checked){
-    setInput({
-      ...input,
-      types: [...input.types, e.target.value],
-    });
-    setError(
-      validate({ ...input, types: [...input.types, e.target.value] })
-    );
-  }else{
-    setInput({
-      ...input,
-      types: input.types.filter( // Filtra los tipos para mantener solo aquellos que no son el tipo deseleccionado
-        (c) => input.types.indexOf(c) !== input.types.indexOf(e.target.value)
-      ),
-    });
-    setError(
-      validate(
-        {
+    if (e.target.checked) {
+      setInput({
+        ...input,
+        types: [...input.types, e.target.value],
+      });
+      setError(validate({ ...input, types: [...input.types, e.target.value] }));
+    } else {
+      setInput({
+        ...input,
+        types: input.types.filter(
+          // Filtra los tipos para mantener solo aquellos que no son el tipo deseleccionado
+          (c) => input.types.indexOf(c) !== input.types.indexOf(e.target.value)
+        ),
+      });
+      setError(
+        validate({
           ...input,
           types: input.types.filter(
             (c) =>
               input.types.indexOf(c) !== input.types.indexOf(e.target.value)
           ),
-        }
-      )
-    );
-  }
+        })
+      );
+    }
   };
 
   const handleReset = () => {
@@ -96,7 +97,11 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postPokemon(input));
-    alert("Successfully created character");
+    Swal.fire({
+      title: "Good job!",
+      text: "Successfully created character",
+      icon: "success",
+    });
     setInput({
       name: "",
       types: [],
@@ -110,16 +115,16 @@ const Form = () => {
     });
   };
 
-
   return (
     <div className={style.contenedor}>
       <div className={style.btnTop}>
-      <Link to={"/home"}>
-        <button className={style.btnHome}>Go home</button>
-      </Link>
-      <button className={style.btnReset} 
-           onClick={handleReset}>Reset</button>
-           </div>
+        <Link to={"/home"}>
+          <button className={style.btnHome}>Go home</button>
+        </Link>
+        <button className={style.btnReset} onClick={handleReset}>
+          Reset
+        </button>
+      </div>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.conTypes}>
           <div className={style.types}>
@@ -161,7 +166,7 @@ const Form = () => {
 
             <label className={style.label}>Attack: {input.attack}</label>
             <input
-            className={style.inputRange}
+              className={style.inputRange}
               value={input.attack}
               onChange={handleChange}
               type="range"
@@ -172,7 +177,7 @@ const Form = () => {
 
             <label className={style.label}>Defense: {input.defense}</label>
             <input
-            className={style.inputRange}
+              className={style.inputRange}
               value={input.defense}
               onChange={handleChange}
               type="range"
@@ -183,7 +188,7 @@ const Form = () => {
 
             <label className={style.label}>Speed: {input.speed}</label>
             <input
-            className={style.inputRange}
+              className={style.inputRange}
               value={input.speed}
               onChange={handleChange}
               type="range"
@@ -194,7 +199,7 @@ const Form = () => {
 
             <label className={style.label}>Height: {input.height}</label>
             <input
-            className={style.inputRange}
+              className={style.inputRange}
               value={input.height}
               onChange={handleChange}
               type="range"
@@ -205,7 +210,7 @@ const Form = () => {
 
             <label className={style.label}>Weight: {input.weight}</label>
             <input
-            className={style.inputRange}
+              className={style.inputRange}
               value={input.weight}
               onChange={handleChange}
               type="range"
@@ -218,7 +223,7 @@ const Form = () => {
         <div className={style.imga}>
           <label className={style.label}>IMAGE</label>
           <input
-          className={style.inputImg}
+            className={style.inputImg}
             type="text"
             value={input.image}
             name="image"
@@ -231,14 +236,13 @@ const Form = () => {
             {error.stats && <p>{error.stats}</p>}
           </div>
           <button
-          className={style.btnCreate}
-          type="submit"
-          disabled={
-            error.name ||
-            error.types ||
-            error.stats
-          }>Create</button>
-        </div> 
+            className={style.btnCreate}
+            type="submit"
+            disabled={error.name || error.types || error.stats}
+          >
+            Create
+          </button>
+        </div>
       </form>
     </div>
   );
